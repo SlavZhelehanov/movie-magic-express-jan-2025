@@ -12,5 +12,6 @@ app.set("view engine", "hbs");
 app.set("views", "./src/views");
 
 app.get("/", (req, res) => { return res.render("home", { title: "Catalog" }); });
+app.get("/about", (req, res) => { return res.render("about", { title: "About" }); });
 
 app.listen(3000, console.log("Server is listening on port: 3000..."));
