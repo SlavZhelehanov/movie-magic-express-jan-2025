@@ -3,6 +3,8 @@ import { engine } from "express-handlebars";
 
 const app = express();
 
+app.use("/static", express.static("src/public"));
+
 app.engine("hbs", engine({
     extname: "hbs"
 }));
