@@ -1,11 +1,18 @@
 import express from "express";
 import { engine } from "express-handlebars";
 
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import routes from "./routes.js";
 
 const app = express();
 
-app.use("/static", express.static("src/public"));
+// app.use("/static", express.static("src/public"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.engine("hbs", engine({
     extname: "hbs"
