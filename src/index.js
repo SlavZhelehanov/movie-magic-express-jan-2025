@@ -13,6 +13,7 @@ const app = express();
 
 // app.use("/static", express.static("src/public"));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: false }));
 
 app.engine("hbs", engine({
     extname: "hbs"
