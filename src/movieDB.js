@@ -1,6 +1,6 @@
 export default [
     {
-        id: "1",
+        id: "8f21bece-a55a-422f-a1a8-ddaf4b3e2be4",
         title: "Jungle Cuise",
         image: "../../img/jungle-cruise.jpeg",
         genre: "Adventure",
@@ -11,7 +11,7 @@ export default [
         category: "movie"
     },
     {
-        id: "2",
+        id: "3ddcd02e-cfb3-4f83-9f3f-e5b02c1d2c50",
         title: "The Little Mermaid",
         image: "../../img/the-little-mermaid.jpg",
         genre: "Fantasy",
@@ -22,7 +22,7 @@ export default [
         category: "movie"
     },
     {
-        id: "3",
+        id: "862f615f-8977-49c1-8020-0e984f9e6862",
         title: "Home Alone",
         image: "../../img/home-alone.jpeg",
         genre: "Comedy",
@@ -32,4 +32,26 @@ export default [
         rating: 3,
         category: "movie"
     },
+    {
+        id: "404116eb-5deb-4e72-80a7-e7da3ac435a1",
+        title: "Avengers: Endgame",
+        image: "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.uZ58frUkd_4qbjOu4fAO1gHaLH%26pid%3DApi&sp=1737221831T1d0bc4aaeddb1ee38301e2fcbe17fab5f6def6e0ea2ba01fb8df6261a5adde3b",
+        genre: "Superhero",
+        description: `After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.`,
+        director: "Anthony Russo",
+        year: 2019,
+        rating: 8.4,
+        category: "movie"
+    },
+    {
+        id: 'de939322-e7d2-472d-bdf1-83b49f497296',
+        title: 'Superman',
+        category: 'movie',
+        genre: 'Superhero',
+        director: 'James Gunn',
+        year: 2025,
+        image: 'https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.qlcCw5tldJ5m8F0Ld2l3LgHaJP%26pid%3DApi&sp=1737222480Ta546c8870b0203c59b90e1321903f9c070dc5e8b4cb4e0763567d20ee993df42',
+        rating: 6,
+        description: 'Follows the titular superhero as he reconciles his heritage with his human upbringing. He is the embodiment of truth, justice and the human way in a world that views this as old-fashioned.'
+    }
 ];

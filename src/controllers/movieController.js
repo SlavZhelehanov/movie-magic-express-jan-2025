@@ -7,8 +7,8 @@ const movieController = Router();
 movieController.get("/create", (req, res) => { return res.render("create", { title: "Create" }); });
 
 movieController.post("/create", (req, res) => {
-    console.log(req.body);
-
+    movieService.create({...req.body, year: +req.body.year, rating: +req.body.rating});
+    return res.redirect("/");
 });
 
 // DETAILS
