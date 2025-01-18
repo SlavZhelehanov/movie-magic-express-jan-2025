@@ -1,6 +1,6 @@
 export default [
     {
-        id: 1,
+        id: "1",
         title: "Jungle Cuise",
         image: "../../img/jungle-cruise.jpeg",
         genre: "Adventure",
@@ -10,7 +10,7 @@ export default [
         rating: 0
     },
     {
-        id: 2,
+        id: "2",
         title: "The Little Mermaid",
         image: "../../img/the-little-mermaid.jpg",
         genre: "Fantasy",
@@ -20,7 +20,7 @@ export default [
         rating: 0
     },
     {
-        id: 3,
+        id: "3",
         title: "Home Alone",
         image: "../../img/home-alone.jpeg",
         genre: "Comedy",
