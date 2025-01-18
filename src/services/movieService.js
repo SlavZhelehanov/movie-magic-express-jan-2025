@@ -2,7 +2,10 @@ import movies from "../movieDB.js";
 import { v4 as uuid } from "uuid";
 
 export default {
-    getAll() { return movies },
+    getAll(filter = {}) {
+        if (filter.search) return movies.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()));
+        return movies;
+    },
     findOne(id) {
         const movie = movies.find(movie => movie.id === id);
         movie.rating = "★".repeat(Math.round(movie.rating));
