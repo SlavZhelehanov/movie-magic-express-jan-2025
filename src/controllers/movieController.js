@@ -15,6 +15,6 @@ movieController.post("/create", (req, res) => {
 movieController.get("/:id/details", (req, res) => { return res.render("details", { title: "Details", movie: movieService.findOne(req.params.id) }); });
 
 // SEARCH
-movieController.get("/search", (req, res) => { return res.render("search", { title: "Search", movies: movieService.getAll(req.query) }); });
+movieController.get("/search", (req, res) => { return res.render("search", { title: "Search", movies: movieService.getAll(req.query), filter: req.query }); });
 
 export default movieController;
