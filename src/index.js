@@ -1,5 +1,6 @@
 import express from "express";
 import { engine } from "express-handlebars";
+import mongoose from "mongoose";
 
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -10,6 +11,14 @@ const __dirname = path.dirname(__filename);
 import routes from "./routes.js";
 
 const app = express();
+const DB_URI = "mongodb://localhost:27017/movie-magic-jan2015"
+
+try {
+    await mongoose.connect(DB_URI);
+    console.log("DB is connected");    
+} catch (dbConnectionErr) {
+    console.error("DB connection error: ", dbConnectionErr.message);    
+}
 
 // app.use("/static", express.static("src/public"));
 app.use(express.static(path.join(__dirname, 'public')));
