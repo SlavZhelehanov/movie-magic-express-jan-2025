@@ -35,7 +35,7 @@ export default [
     {
         id: "404116eb-5deb-4e72-80a7-e7da3ac435a1",
         title: "Avengers: Endgame",
-        image: "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.uZ58frUkd_4qbjOu4fAO1gHaLH%26pid%3DApi&sp=1737221831T1d0bc4aaeddb1ee38301e2fcbe17fab5f6def6e0ea2ba01fb8df6261a5adde3b",
+        image: "https://media.assettype.com/thequint%2F2019-04%2F7bbf3477-8596-4a1b-9150-d67fc0eedf13%2Fw4botl43ntm21.png?rect=0%2C0%2C1688%2C950&auto=format%2Ccompress&fmt=webp&width=720",
         genre: "Superhero",
         description: `After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.`,
         director: "Anthony Russo",
@@ -50,7 +50,7 @@ export default [
         genre: 'Superhero',
         director: 'James Gunn',
         year: 2025,
-        image: 'https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.qlcCw5tldJ5m8F0Ld2l3LgHaJP%26pid%3DApi&sp=1737222480Ta546c8870b0203c59b90e1321903f9c070dc5e8b4cb4e0763567d20ee993df42',
+        image: 'https://m.media-amazon.com/images/M/MV5BZjFhZmU5NzUtZTg4Zi00ZjRjLWI0YmQtODk2MzI4YjNhYTdkXkEyXkFqcGc@._V1_.jpg',
         rating: 6,
         description: 'Follows the titular superhero as he reconciles his heritage with his human upbringing. He is the embodiment of truth, justice and the human way in a world that views this as old-fashioned.'
     }
