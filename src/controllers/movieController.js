@@ -12,7 +12,11 @@ movieController.post("/create", (req, res) => {
 });
 
 // DETAILS
-movieController.get("/:id/details", (req, res) => { return res.render("details", { title: "Details", movie: movieService.findOne(req.params.id) }); });
+movieController.get("/:id/details", async(req, res) => { 
+    let movie = await movieService.findOne(req.params.id);
+    movie.rating = "★".repeat(Math.round(movie.rating));
+    return res.render("details", { title: "Details", movie });
+ });
 
 // SEARCH
 movieController.get("/search", (req, res) => { return res.render("search", { title: "Search", movies: movieService.getAll(req.query), filter: req.query }); });
