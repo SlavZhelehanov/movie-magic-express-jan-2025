@@ -11,6 +11,16 @@ export default {
         // if (filter.genre) result = [...result.filter(movie => movie.genre.toLowerCase() === filter.genre.toLowerCase())];
         // if (filter.year) result = [...result.filter(movie => movie.year === +filter.year)];
 
+        if (filter.search) {
+            result = result.where({ title: filter.search });
+        }
+        if (filter.genre) {
+            result = result.where({ genre: filter.genre });
+        }
+        if (filter.year) {
+            result = result.where({ year: +filter.year });
+        }
+
         return result;
     },
     findOne(id) {
