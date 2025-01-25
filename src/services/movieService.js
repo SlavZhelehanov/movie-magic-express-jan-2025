@@ -1,5 +1,5 @@
 // import movies from "../movieDB.js";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 import Movie from "../models/Movie.js";
 
 export default {
@@ -30,8 +30,10 @@ export default {
         return movie;
     },
     create(data) {
+        const newMovie = Movie.create(date);
+        return newMovie;
         // movies.push({ id: uuid(), ...data });
         // movies.push({ id: uuid(), ...data });
-        return uuid();
+        // return uuid();
     }
 }
