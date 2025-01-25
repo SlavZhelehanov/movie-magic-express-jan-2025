@@ -30,7 +30,7 @@ export default {
         return movie;
     },
     create(data) {
-        const newMovie = Movie.create(date);
+        const newMovie = Movie.create(data);
         return newMovie;
         // movies.push({ id: uuid(), ...data });
         // movies.push({ id: uuid(), ...data });

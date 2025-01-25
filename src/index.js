@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 import routes from "./routes.js";
 
 const app = express();
-const DB_URI = "mongodb://localhost:27017/movie-magic-jan2015"
+const DB_URI = "mongodb://127.0.0.1:27017/movie-magic-jan2015"
 
 try {
     await mongoose.connect(DB_URI);
