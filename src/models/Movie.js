@@ -9,7 +9,7 @@ const movieSchema = new Schema({
     image: String,
     rating: Number,
     description: String
-});
+}, { timestamps: true });
 
 const Movie = model("Movie", movieSchema);
 
