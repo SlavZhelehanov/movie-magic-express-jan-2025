@@ -14,8 +14,9 @@ movieController.post("/create", async (req, res) => {
 // DETAILS
 movieController.get("/:id/details", async (req, res) => {
     let movie = await movieService.findOne(req.params.id);
-    movie.rating = "★".repeat(Math.round(movie.rating));
-    return res.render("details", { title: "Details", movie });
+    const rating = "★".repeat(Math.round(movie.rating));
+    
+    return res.render("movie/details", { title: "Details", movie, rating });
 });
 
 // SEARCH
@@ -23,6 +24,11 @@ movieController.get("/search", async (req, res) => {
     const filter = req.query;
     const movies = await movieService.getAll(filter);
     return res.render("search", { title: "Search", movies, filter });
+});
+
+// ATTACH CAST
+movieController.get("/:id/attachCast", (req, res) => {
+    return res.render("movie/attachCast");
 });
 
 export default movieController;
