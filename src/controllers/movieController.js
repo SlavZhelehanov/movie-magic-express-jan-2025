@@ -27,8 +27,9 @@ movieController.get("/search", async (req, res) => {
 });
 
 // ATTACH CAST
-movieController.get("/:id/attachCast", (req, res) => {
-    return res.render("movie/attachCast");
+movieController.get("/:id/attachCast", async (req, res) => {
+    let movie = await movieService.findOne(req.params.id);
+    return res.render("movie/attachCast", {title: "Attach Cast", movie});
 });
 
 export default movieController;
