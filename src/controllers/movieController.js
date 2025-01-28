@@ -30,13 +30,13 @@ movieController.get("/search", async (req, res) => {
 // ATTACH CAST
 movieController.get("/:id/attachCast", async (req, res) => {
     let movie = await movieService.findOne(req.params.id);
-    let casts = await castService.getAll();
+    let casts = await castService.getAll({ exclude: movie.casts });
     return res.render("movie/attachCast", { title: "Attach Cast", movie, casts });
 });
 
 movieController.post("/:id/attachCast", async (req, res) => {
     await movieService.attachCast(req.params.id, req.body.cast);
-    return res.redirect(`movie/r${req.params.id}/details`);
+    return res.redirect(`/movie/${req.params.id}/details`);
 });
 
 export default movieController;
