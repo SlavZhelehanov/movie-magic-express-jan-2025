@@ -35,5 +35,12 @@ export default {
         // movies.push({ id: uuid(), ...data });
         // movies.push({ id: uuid(), ...data });
         // return uuid();
+    },
+    async attachCast(movieId, castId) {
+        // Attach #1
+        const movie = await Movie.findById(movieId);
+        movie.casts.push(castId);
+        await movie.save();
+        return movie;
     }
 }
