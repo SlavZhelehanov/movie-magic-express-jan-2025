@@ -29,6 +29,9 @@ export default {
         // movie.rating = "★".repeat(Math.round(movie.rating));
         return movie;
     },
+    getOneWithCasts(id) {
+        return this.findOne(id).populate("casts");
+    },
     create(data) {
         const newMovie = Movie.create(data);
         return newMovie;
