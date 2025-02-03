@@ -10,7 +10,7 @@ authController.post("/register", async (req, res) => {
     let { email, password, confirm } = req.body;
     email = email.trim(); password = password.trim(); confirm = confirm.trim();
 
-    await authService.register({ email, password, confirm });
+    if (password === confirm) await authService.register({ email, password });
 
     return res.end();
     return res.render("auth/register", { title: "Register" })
