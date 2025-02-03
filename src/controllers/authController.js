@@ -1,4 +1,5 @@
 import { Router } from "express";
+import authService from "../services/authService.js";
 
 const authController = Router();
 
@@ -9,7 +10,7 @@ authController.post("/register", async (req, res) => {
     let { email, password, confirm } = req.body;
     email = email.trim(); password = password.trim(); confirm = confirm.trim();
 
-    console.log(`Email: ${email}; Password: ${password}; Repeat-password: ${confirm}`);
+    await authService.register({ email, password, confirm });
 
     return res.end();
     return res.render("auth/register", { title: "Register" })
