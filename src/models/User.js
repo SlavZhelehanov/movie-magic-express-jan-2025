@@ -1,6 +1,13 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import bcrypt from "bcrypt";
 
-export default mongoose.model("User", new mongoose.Schema({
-    email: { type: String, required: true },
-    password: { type: String, required: true }
-}));
+const userSchema = new Schema({
+    email: { type: String, required: [true, "Email is required"] },
+    password: { type: String, required: [true, "Password is required"] }
+});
+
+userSchema.pre("save", async function () {
+    this.password = await bcrypt.hash(this.password, 10);
+});
+
+export default model("User", userSchema);
