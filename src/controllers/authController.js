@@ -12,8 +12,12 @@ authController.post("/register", async (req, res) => {
 
     if (password === confirm) await authService.register({ email, password });
 
-    return res.end();
-    return res.render("auth/register", { title: "Register" })
+    return res.redirect("/auth/login");
+});
+
+// LOGIN
+authController.get("/login", (req, res) => { return res.render("auth/login", { title: "Login" }) });
+
 });
 
 export default authController;
