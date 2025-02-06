@@ -1,6 +1,7 @@
 import express from "express";
 import { engine } from "express-handlebars";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -23,6 +24,7 @@ try {
 // app.use("/static", express.static("src/public"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.engine("hbs", engine({
     extname: "hbs",
