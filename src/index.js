@@ -10,9 +10,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import routes from "./routes.js";
+import { authMiddleware } from "./middlewares/auth-middleware.js";
+import { DB_URI, PORT } from "./util/constants.js";
 
 const app = express();
-const DB_URI = "mongodb://127.0.0.1:27017/movie-magic-jan2015"
 
 try {
     await mongoose.connect(DB_URI);
@@ -25,6 +26,7 @@ try {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(authMiddleware);
 
 app.engine("hbs", engine({
     extname: "hbs",
@@ -35,4 +37,4 @@ app.set("views", "./src/views");
 
 app.use(routes);
 
-app.listen(3000, console.log("Server is listening on port: 3000..."));
+app.listen(PORT, console.log(`Server is listening on port: ${PORT}...`));

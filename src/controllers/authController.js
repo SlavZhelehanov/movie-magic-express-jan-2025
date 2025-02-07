@@ -1,5 +1,6 @@
 import { Router } from "express";
 import authService from "../services/authService.js";
+import { COOKIE_NAME } from "../util/constants.js";
 
 const authController = Router();
 
@@ -24,7 +25,7 @@ authController.post("/login", async (req, res) => {
 
     try {
         const token = await authService.login(email, password);
-        res.cookie("auth", token);
+        res.cookie(COOKIE_NAME, token);
         return res.redirect("/");
     } catch (error) {
         console.log(error.message);
