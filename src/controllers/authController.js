@@ -33,4 +33,10 @@ authController.post("/login", async (req, res) => {
     }
 });
 
+// LOGOUT
+authController.delete("/logout", (req, res) => {
+    res.clearCookie(COOKIE_NAME);
+    return res.redirect("/");
+});
+
 export default authController;
