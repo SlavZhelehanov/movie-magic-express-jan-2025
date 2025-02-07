@@ -9,7 +9,8 @@ const movieSchema = new Schema({
     image: String,
     rating: Number,
     description: String,
-    casts: [{ type: Types.ObjectId, ref: "Cast" }]
+    casts: [{ type: Types.ObjectId, ref: "Cast" }],
+    creator: { type: Types.ObjectId, ref: "User" }
 }, { timestamps: true });
 
 const Movie = model("Movie", movieSchema);
