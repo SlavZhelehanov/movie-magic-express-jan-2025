@@ -15,9 +15,10 @@ movieController.post("/create", async (req, res) => {
 // DETAILS
 movieController.get("/:id/details", async (req, res) => {
     let movie = await movieService.getOneWithCasts(req.params.id);
+    const isCreator = req.user && movie.creator.equals(req.user.id); 
     const rating = "★".repeat(Math.round(movie.rating));
 
-    return res.render("movie/details", { title: "Details", movie, rating });
+    return res.render("movie/details", { title: "Details", movie, rating, isCreator });
 });
 
 // SEARCH

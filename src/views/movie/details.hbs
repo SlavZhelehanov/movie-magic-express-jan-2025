@@ -22,9 +22,13 @@
                 <p class="disc">Description: {{movie.description}}</p>
                 <p class="card-category">Category: {{movie.category}}</p>
 
-                <div style="display: flex; justify-content: center;">
-                    <a href="/movie/{{movie._id}}/attachCast" class="details">Attach Cast</a>
-                </div>
+                {{#if isCreator}}
+                    <div style="display: flex; justify-content: center;">
+                        <a href="/movie/{{movie._id}}/attachCast" class="details">Attach Cast</a>
+                        <a href="/movie/{{movie._id}}/edit" class="details">Edit</a>
+                        <a href="/movie/{{movie._id}}/delete?_method=DELETE" class="details">Delete</a>
+                    </div>
+                {{/if}}
             </div>
         </div>
         <div class="card_right">
@@ -36,7 +40,7 @@
         {{#each movie.casts}}
             <div class="cast-card">
                 <div class="card-img">
-                    <img src="{{image}}"  alt="{{name}}">
+                    <img src="{{image}}" alt="{{name}}">
                 </div>
                 <div class="cast-info">
                     <h1>{{name}}</h1>
