@@ -12,6 +12,9 @@ export const authMiddleware = (req, res, next) => {
         res.local.user = decoded;
         return next();
     } catch (err) {
-
+        res.clearCookie(COOKIE_NAME);
+        delete req.user;
+        delete res.locals.user;
+        return res.redirect("/auth/login");
     }
 };
