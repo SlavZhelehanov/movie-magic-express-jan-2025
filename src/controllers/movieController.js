@@ -15,7 +15,7 @@ movieController.post("/create", async (req, res) => {
 // DETAILS
 movieController.get("/:id/details", async (req, res) => {
     let movie = await movieService.getOneWithCasts(req.params.id);
-    const isCreator = req.user && movie.creator.equals(req.user.id); 
+    const isCreator = req.user && movie.creator.equals(req.user.id);
     const rating = "★".repeat(Math.round(movie.rating));
 
     return res.render("movie/details", { title: "Details", movie, rating, isCreator });
@@ -43,12 +43,30 @@ movieController.post("/:id/attachCast", async (req, res) => {
 // DELETE MOVIE
 movieController.delete("/:id/delete", async (req, res) => {
     const movie = await movieService.findOne(req.params.id);
-    console.log(req.user);
-    
-    if(!movie.creator?.equals(req.user?.id)) return res.redirect("/404");
+
+    if (!movie.creator?.equals(req.user?.id)) return res.redirect("/404");
 
     await movieService.delete(req.params.id);
 
     return res.redirect("/");
 });
+
+// EDIT MOVIE
+movieController.get("/:id/edit", async (req, res) => {
+    const movie = await movieService.findOne(req.params.id);
+    
+    return res.render("movie/edit", { movie });
+});
+
+movieController.post("/:id/edit", async (req, res) => {
+    const movie = await movieService.findOne(req.params.id);
+    console.log(req.user);
+
+    if (!movie.creator?.equals(req.user?.id)) return res.redirect("/404");
+
+    await movieService.delete(req.params.id);
+
+    return res.redirect("/");
+});
+
 export default movieController;
