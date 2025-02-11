@@ -6,13 +6,14 @@
         <li><a href="/movie/search">Search</a></li>
         <li><a href="/about">About</a></li>
         {{!-- {{#if isAuth}} --}}
+        {{#if user}}
             <li><a href="/movie/create">Create Post</a></li>
             <li><a href="/casts/create">Create Cast</a></li>
             <li><a href="/auth/logout?_method=DELETE">Logout</a></li>
-        {{!-- {{else}} --}}
+        {{else}}
             <li><a href="/auth/login">Login</a></li>
             <li><a href="/auth/register">Register</a></li>
-        {{!-- {{/if}} --}}
+        {{/if}}
     </ul>
 
 </nav>

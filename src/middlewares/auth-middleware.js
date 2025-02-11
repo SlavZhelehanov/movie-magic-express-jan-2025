@@ -9,7 +9,7 @@ export const authMiddleware = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
         req.user = decoded;
-        res.local.user = decoded;
+        res.locals.user = decoded;
         return next();
     } catch (err) {
         res.clearCookie(COOKIE_NAME);
