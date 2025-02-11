@@ -12,6 +12,7 @@ const __dirname = path.dirname(__filename);
 import routes from "./routes.js";
 import { authMiddleware } from "./middlewares/auth-middleware.js";
 import { DB_URI, PORT } from "./util/constants.js";
+import { methodOverride } from "./middlewares/methodOverride.js";
 
 const app = express();
 
@@ -26,6 +27,7 @@ try {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(methodOverride);
 app.use(authMiddleware);
 
 app.engine("hbs", engine({
