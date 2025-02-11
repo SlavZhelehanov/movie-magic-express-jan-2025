@@ -1,13 +1,14 @@
 import { Router } from "express";
 import movieService from "../services/movieService.js";
 import castService from "../services/castService.js";
+import { isUser } from "../middlewares/auth-middleware.js";
 
 const movieController = Router();
 
 // CREATE
-movieController.get("/create", (req, res) => { return res.render("create", { title: "Create" }); });
+movieController.get("/create", isUser, (req, res) => { return res.render("create", { title: "Create" }); });
 
-movieController.post("/create", async (req, res) => {
+movieController.post("/create", isUser, async (req, res) => {
     await movieService.create({ ...req.body, year: +req.body.year, rating: +req.body.rating, creator: req.user?.id });
     return res.redirect("/");
 });
@@ -29,19 +30,19 @@ movieController.get("/search", async (req, res) => {
 });
 
 // ATTACH CAST
-movieController.get("/:id/attachCast", async (req, res) => {
+movieController.get("/:id/attachCast", isUser, async (req, res) => {
     let movie = await movieService.findOne(req.params.id);
     let casts = await castService.getAll({ exclude: movie.casts });
     return res.render("movie/attachCast", { title: "Attach Cast", movie, casts });
 });
 
-movieController.post("/:id/attachCast", async (req, res) => {
+movieController.post("/:id/attachCast", isUser, async (req, res) => {
     await movieService.attachCast(req.params.id, req.body.cast);
     return res.redirect(`/movie/${req.params.id}/details`);
 });
 
 // DELETE MOVIE
-movieController.delete("/:id/delete", async (req, res) => {
+movieController.delete("/:id/delete", isUser, async (req, res) => {
     const movie = await movieService.findOne(req.params.id);
 
     if (!movie.creator?.equals(req.user?.id)) return res.redirect("/404");
@@ -70,7 +71,7 @@ function getCategoriesViewData(category) {
     return categories;
 }
 
-movieController.get("/:id/edit", async (req, res) => {
+movieController.get("/:id/edit", isUser, async (req, res) => {
     const movie = await movieService.findOne(req.params.id);
 
     const categories = getCategoriesViewData(movie.category);
@@ -78,7 +79,7 @@ movieController.get("/:id/edit", async (req, res) => {
     return res.render("movie/edit", { movie, categories });
 });
 
-movieController.put("/:id/edit", async (req, res) => {
+movieController.put("/:id/edit", isUser, async (req, res) => {
     const movie = await movieService.findOne(req.params.id);
 
     if (!movie.creator?.equals(req.user?.id)) return res.redirect("/404");

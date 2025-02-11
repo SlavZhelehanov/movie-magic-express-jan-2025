@@ -18,3 +18,13 @@ export const authMiddleware = (req, res, next) => {
         return res.redirect("/auth/login");
     }
 };
+
+export const isUser = (req, res, next) => {
+    if (req.user) return next();
+    return res.redirect("/auth/login");
+};
+
+export const isGuest = (req, res, next) => {
+    if (req.user) return res.redirect("/");
+    return next();
+};
