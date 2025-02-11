@@ -40,4 +40,15 @@ movieController.post("/:id/attachCast", async (req, res) => {
     return res.redirect(`/movie/${req.params.id}/details`);
 });
 
+// DELETE MOVIE
+movieController.delete("/:id/delete", async (req, res) => {
+    const movie = await movieService.findOne(req.params.id);
+    console.log(req.user);
+    
+    if(!movie.creator?.equals(req.user?.id)) return res.redirect("/404");
+
+    await movieService.delete(req.params.id);
+
+    return res.redirect("/");
+});
 export default movieController;
