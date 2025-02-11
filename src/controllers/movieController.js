@@ -52,17 +52,38 @@ movieController.delete("/:id/delete", async (req, res) => {
 });
 
 // EDIT MOVIE
+function getCategoriesViewData(category) {
+    const categoriesMap = {
+        "tv-show": "Tv-show",
+        "animation": "Animation",
+        "movie": "Movie",
+        "documentary": "Documentary",
+        "short-film": "Short-film"
+    }
+
+    const categories = Object.keys(categoriesMap).map(value => ({
+        value,
+        label: categoriesMap[value],
+        selected: value === category ? "selected" : ''
+    }));
+
+    return categories;
+}
+
 movieController.get("/:id/edit", async (req, res) => {
     const movie = await movieService.findOne(req.params.id);
-    
-    return res.render("movie/edit", { movie });
+
+    const categories = getCategoriesViewData(movie.category);
+
+    return res.render("movie/edit", { movie, categories });
 });
 
 movieController.post("/:id/edit", async (req, res) => {
     const movie = await movieService.findOne(req.params.id);
-    console.log(req.user);
 
     if (!movie.creator?.equals(req.user?.id)) return res.redirect("/404");
+
+
 
     await movieService.delete(req.params.id);
 
