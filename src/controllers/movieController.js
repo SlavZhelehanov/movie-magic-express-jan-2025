@@ -2,6 +2,7 @@ import { Router } from "express";
 import movieService from "../services/movieService.js";
 import castService from "../services/castService.js";
 import { isUser } from "../middlewares/auth-middleware.js";
+import { errorParser } from "../util/errorParser.js";
 
 const movieController = Router();
 
@@ -9,17 +10,28 @@ const movieController = Router();
 movieController.get("/create", isUser, (req, res) => { return res.render("create", { title: "Create" }); });
 
 movieController.post("/create", isUser, async (req, res) => {
-    await movieService.create({ ...req.body, year: +req.body.year, rating: +req.body.rating, creator: req.user?.id });
-    return res.redirect("/");
+    try {
+        await movieService.create({ ...req.body, year: +req.body.year, rating: +req.body.rating, creator: req.user?.id });
+        return res.redirect("/");
+    } catch (error) {
+        return console.log(errorParser(error));
+    }
 });
 
 // DETAILS
 movieController.get("/:id/details", async (req, res) => {
-    let movie = await movieService.getOneWithCasts(req.params.id);
-    const isCreator = req.user && movie.creator.equals(req.user.id);
-    const rating = "★".repeat(Math.round(movie.rating));
+    try {
+        const movie = await movieService.getOneWithCasts(req.params.id);
 
-    return res.render("movie/details", { title: "Details", movie, rating, isCreator });
+        if(!movie) throw ["Wrong movie id!"];
+        const isCreator = req.user && movie.creator.equals(req.user.id);
+        const rating = "★".repeat(Math.round(movie.rating));
+
+        return res.render("movie/details", { title: "Details", movie, rating, isCreator });
+    } catch (error) {
+        console.log(errorParser(error));
+        return res.redirect("/404");
+    }
 });
 
 // SEARCH
