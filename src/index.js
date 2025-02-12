@@ -2,6 +2,7 @@ import express from "express";
 import { engine } from "express-handlebars";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -13,6 +14,7 @@ import routes from "./routes.js";
 import { authMiddleware } from "./middlewares/auth-middleware.js";
 import { DB_URI, PORT } from "./util/constants.js";
 import { methodOverride } from "./middlewares/methodOverride.js";
+import { flash } from "./middlewares/flash.js";
 
 const app = express();
 
@@ -27,6 +29,13 @@ try {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+    secret: 'SuperMegaGigaSecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, httpOnly: true }
+}));
+app.use(flash);
 app.use(methodOverride);
 app.use(authMiddleware);
 
