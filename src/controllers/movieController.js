@@ -96,16 +96,24 @@ movieController.get("/:id/edit", isUser, async (req, res) => {
 });
 
 movieController.put("/:id/edit", isUser, async (req, res) => {
-    const movie = await movieService.findOne(req.params.id);
+    const formData = req.body;
 
-    if (!movie.creator?.equals(req.user?.id)) {
-        req.session.messages = ["You're forbiden for this action"];
-        return res.redirect("/404");
+    try {
+        const movie = await movieService.findOne(req.params.id);
+
+        // if (!movie.creator?.equals(req.user?.id)) {
+        //     req.session.error = ["You're forbiden for this action"];
+        //     return res.redirect("/404");
+        // }
+
+        await movieService.update(req.params.id, req.body);
+
+        return res.redirect(`/movie/${req.params.id}/details`);
+    } catch (error) {
+        res.setError(errorParser(error));
+        return res.redirect(req.url);
+        // return res.render("movie/edit", { movie: formData, categories: getCategoriesViewData("") });
     }
-
-    await movieService.update(req.params.id, req.body);
-
-    return res.redirect(`/movie/${req.params.id}/details`);
 });
 
 export default movieController;

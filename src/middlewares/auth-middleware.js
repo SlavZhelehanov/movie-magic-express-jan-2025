@@ -12,6 +12,7 @@ export const authMiddleware = (req, res, next) => {
         res.locals.user = decoded;
         return next();
     } catch (err) {
+        res.setError("Invalid Authentication!");
         res.clearCookie(COOKIE_NAME);
         delete req.user;
         delete res.locals.user;

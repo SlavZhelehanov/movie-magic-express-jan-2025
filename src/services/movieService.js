@@ -47,12 +47,12 @@ export default {
         // return movie;
 
         // Attach #2
-        return Movie.findByIdAndUpdate(movieId, { $push: { casts: castId } });
+        return Movie.findByIdAndUpdate(movieId, { $push: { casts: castId } }, { runValidators: true });
     },
     delete(movieId) {
         return Movie.findByIdAndDelete(movieId);
     },
     update(movieId, movieData) {
-        return Movie.findByIdAndUpdate(movieId, movieData);
+        return Movie.findByIdAndUpdate(movieId, movieData, { runValidators: true });
     }
 }

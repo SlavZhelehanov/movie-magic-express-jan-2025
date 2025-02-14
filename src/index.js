@@ -14,7 +14,8 @@ import routes from "./routes.js";
 import { authMiddleware } from "./middlewares/auth-middleware.js";
 import { DB_URI, PORT } from "./util/constants.js";
 import { methodOverride } from "./middlewares/methodOverride.js";
-import { flash } from "./middlewares/flash.js";
+import { tempData } from "./middlewares/tempDataMiddleware.js";
+// import { flash } from "./middlewares/flash.js";
 
 const app = express();
 
@@ -32,10 +33,11 @@ app.use(cookieParser());
 app.use(session({
     secret: 'SuperMegaGigaSecret',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { secure: false, httpOnly: true }
 }));
-app.use(flash);
+// app.use(flash);
+app.use(tempData);
 app.use(methodOverride);
 app.use(authMiddleware);
 
