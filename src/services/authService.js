@@ -8,6 +8,12 @@ export default {
         return User.create(data);
     },
     async login(email, password) {
+        let messages = [];
+
+        if (!email || email.length < 1) messages.push("The email's field cant't be empty");
+        if (!password || password.length < 1) messages.push("The password's field cant't be empty");
+        if (0 < messages.length) throw messages;
+        
         const user = await User.findOne({ email });
         if (!user) throw new Error("Invalid email or password");
 

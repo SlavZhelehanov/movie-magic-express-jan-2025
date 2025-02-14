@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 const userSchema = new Schema({
     email: {
         type: String,
+        trim: true,
         unique: true,
         required: [true, "Email is required"],
         match: [/\@[a-zA-Z]+.[a-zA-Z]+$/, "Email should end in @x.x, where x is one ot more English letters/digits"],

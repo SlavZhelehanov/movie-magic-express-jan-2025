@@ -14,7 +14,8 @@ movieController.post("/create", isUser, async (req, res) => {
         await movieService.create({ ...req.body, year: +req.body.year, rating: +req.body.rating, creator: req.user?.id });
         return res.redirect("/");
     } catch (error) {
-        return console.log(errorParser(error));
+        console.log(errorParser(error));
+        return res.render("create", { title: "Create", messages: errorParser(error) });
     }
 });
 
@@ -23,13 +24,13 @@ movieController.get("/:id/details", async (req, res) => {
     try {
         const movie = await movieService.getOneWithCasts(req.params.id);
 
-        if(!movie) throw ["Wrong movie id!"];
+        if (!movie) throw ["Wrong movie id!"];
         const isCreator = req.user && movie.creator.equals(req.user.id);
         const rating = "★".repeat(Math.round(movie.rating));
 
         return res.render("movie/details", { title: "Details", movie, rating, isCreator });
     } catch (error) {
-        console.log(errorParser(error));
+        req.session.messages = errorParser(error);
         return res.redirect("/404");
     }
 });
@@ -57,7 +58,10 @@ movieController.post("/:id/attachCast", isUser, async (req, res) => {
 movieController.delete("/:id/delete", isUser, async (req, res) => {
     const movie = await movieService.findOne(req.params.id);
 
-    if (!movie.creator?.equals(req.user?.id)) return res.redirect("/404");
+    if (!movie.creator?.equals(req.user?.id)) {
+        req.session.messages = ["You're forbiden for this action"];
+        return res.redirect("/404");
+    }
 
     await movieService.delete(req.params.id);
 
@@ -94,7 +98,10 @@ movieController.get("/:id/edit", isUser, async (req, res) => {
 movieController.put("/:id/edit", isUser, async (req, res) => {
     const movie = await movieService.findOne(req.params.id);
 
-    if (!movie.creator?.equals(req.user?.id)) return res.redirect("/404");
+    if (!movie.creator?.equals(req.user?.id)) {
+        req.session.messages = ["You're forbiden for this action"];
+        return res.redirect("/404");
+    }
 
     await movieService.update(req.params.id, req.body);
 
